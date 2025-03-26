@@ -1,10 +1,8 @@
 #!/bin/bash
 
 # Installing tools
-sudo apt-get install -y parallel jq python3 python3-pip unzip
-
-pip3 install --break-system-packages shodan censys
-
+sudo apt-get install -y parallel jq python3 python3-pip unzip python3-shodan
+pip install censys
 # Install tools using Go
 GO111MODULE=on go install -v github.com/projectdiscovery/subfinder/v2/cmd/subfinder@latest
 GO111MODULE=on go install -v github.com/owasp-amass/amass/v3/...@master
