@@ -19,7 +19,7 @@ GO111MODULE=on go install github.com/incogbyte/shosubgo@latest
 GO111MODULE=on go install -v github.com/projectdiscovery/httpx/cmd/httpx@latest
 GO111MODULE=on go install -v github.com/tomnomnom/anew@latest
 GO111MODULE=on go install github.com/tomnomnom/unfurl@latest
-git clone https://github.com/blechschmidt/massdns.git && cd massdns && make && sudo make install
+git clone https://github.com/blechschmidt/massdns.git && cd massdns && make && sudo make install && cd ..
 GO111MODULE=on go install github.com/d3mondev/puredns/v2@latest
 GO111MODULE=on go install -v github.com/projectdiscovery/dnsx/cmd/dnsx@latest
 
