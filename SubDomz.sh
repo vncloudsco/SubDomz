@@ -5,7 +5,7 @@ BOLD="\e[1m"
 UNDERLINE="\e[4m"
 RED="\e[31m"
 GREEN="\e[32m"
-BLUE="\e[34"
+BLUE="\e[34m" # Fixed incorrect color code definition
 CYAN="\e[36m"
 NC="\e[0m"
 VERSION="3.0"
@@ -66,7 +66,7 @@ spinner() {
         while true;
         do
                 dots=( "/" "-" "\\" "|" )
-                for dot in ${dots[@]};
+                for dot in "${dots[@]}"; # Added quotes around array expansion
                 do
                         printf "[${dot}] ${processing} \U1F50E"
                         printf "                                        \r"
@@ -126,7 +126,7 @@ Findomain() {
 		}
 		findomain -t $domain -q > tmp-findomain-$domain &>/dev/null
 		[[ ${PARALLEL} == True ]] || kill ${PID} 2>/dev/null
-		echo -e "$BOLD[*] Findomain$NC: $(wc -l tmp-findomain-$domain)"
+		echo -e "$BOLD[*] Findomain$NC: $(wc -l < tmp-findomain-$domain)" # Fixed missing '<' in wc command
 	}
 }
 
@@ -258,19 +258,20 @@ Certspotter() {
 		}
 		curl -sk "https://api.certspotter.com/v1/issuances?domain=$domain&include_subdomains=true&expand=dns_names" | jq -r '.[].dns_names[]' | sort -u > tmp-certspotter-$domain
 		[[ ${PARALLEL} == True ]] || kill ${PID} 2>/dev/null
-		echo -e "$BOLD[*] CertSpotter$NC: $( wc -l < tmp-certspotter-$domain && echo)"
+		echo -e "$BOLD[*] CertSpotter$NC: $(wc -l < tmp-certspotter-$domain)" # Fixed missing '<' in wc command
 	}
 }
 
 VirusTotal() {
-  [ "$silent" == True ] && curl -s "https://www.virustotal.com/vtapi/v2/domain/report?apikey=$VIRUSTOTAL_API_KEY&domain=$domain" | jq | egrep -v "http|Alexa domain info" | grep "$domain" | sed 's/[",]//g' | sed 's/^[[:space:]]*//' | anew subdomz-$domain.txt || {
+  [ "$silent" == True ] && curl -s "https://www.virustotal.com/vtapi/v2/domain/report?apikey=$VIRUSTOTAL_API_KEY&domain=$domain" | jq | egrep -v "http|Alexa domain info" | grep "$domain" | sed 's/[\",]//g' | sed 's/^[[:space:]]*//' | anew subdomz-$domain.txt || {
   		[[ ${PARALLEL} == True ]] || { spinner "${BOLD}VirusTotal${NC}" &
     			PID="$!"
        		}
-	 	curl -s "https://www.virustotal.com/vtapi/v2/domain/report?apikey=$VIRUSTOTAL_API_KEY&domain=$domain" | jq | egrep -v "http|Alexa domain info" | grep "$domain" | sed 's/[",]//g' | sed 's/^[[:space:]]*//' | sort -u > tmp-virustotal-$domain
+	 	curl -s "https://www.virustotal.com/vtapi/v2/domain/report?apikey=$VIRUSTOTAL_API_KEY&domain=$domain" | jq | egrep -v "http|Alexa domain info" | grep "$domain" | sed 's/[\",]//g' | sed 's/^[[:space:]]*//' | sort -u > tmp-virustotal-$domain
    		[[ ${PARALLEL} == True ]] || kill ${PID} 2>/dev/null
-     		echo -e "$BOLD[*] VirusTotal$NC: $( wc -l < tmp-virustotal-$domain && echo)"
+     		echo -e "$BOLD[*] VirusTotal$NC: $(wc -l < tmp-virustotal-$domain)" # Fixed missing '<' in wc command
        }
+}
 
 Puredns() {
   [ "$silent" == True ] && puredns bruteforce $WORDLISTS $DOMAIN --resolvers $RESOLVERS -q | anew subdomz-$domain.txt || {
