@@ -7,7 +7,7 @@ hash censys 2>/dev/null && printf "[censys]$g Installed$e\n" || printf "[censys]
 hash subfinder 2>/dev/null && printf "[subfinder]$g Installed$e\n" || printf "[subfinder]$r Install Manually.$e\n"
 hash amass 2>/dev/null && printf "[amass]$g Installed$e\n" || printf "[amass]$r Install Manually.$e\n"
 hash assetfinder 2>/dev/null && printf "[assetfinder]$g Installed$e\n" || printf "[assetfinder]$r Install Manually.$e\n"
-hash chaos-client 2>/dev/null && printf "[chaos]$g Installed$e\n" || printf "[chaos]$r Install Manually.$e\n"
+hash chaos 2>/dev/null && printf "[chaos]$g Installed$e\n" || printf "[chaos]$r Install Manually.$e\n"
 hash findomain 2>/dev/null && printf "[findomain]$g Installed$e\n" || printf "[findomain]$r Install Manually.$e\n"
 hash haktrails 2>/dev/null && printf "[haktrails]$g Installed$e\n" || printf "[haktrails]$r Install Manually.$e\n"
 hash gau 2>/dev/null && printf "[gau]$g Installed$e\n" || printf "[gau]$r Install Manually.$e\n"
