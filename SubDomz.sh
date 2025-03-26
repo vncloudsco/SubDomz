@@ -12,7 +12,7 @@ VERSION="3.0"
 
 PRG=${0##*/}
 
-source config.txt
+source config.sh
 
 Usage() {
         while read -r line; do

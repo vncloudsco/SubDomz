@@ -1,3 +1,4 @@
+#!/bin/bash
 # configuration files and API keys
 # feed with your api keys and tokens to subfinder and amass config files for moreee subdomains
 
